@@ -1,0 +1,1327 @@
+<html>
+<head>
+	<title>Text Component Generator</title>
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<style type="text/css">
+@font-face {
+	font-family: 'minecraftfont';
+	src: url('./minecraftfont.eot');
+	src: local('minecraftfont'), url('./minecraftfont.woff') format('woff'), url('./minecraftfont.ttf') format('truetype');
+}
+/*Themes*/
+	.THpurple {
+		--color-bg: #fff;
+		--color-light: #ccc3e6;
+		--color-main: #a595d7;
+		--color-medium: #6a58a6;
+		--color-dark: #3f276f;
+		--color-text: #666;
+	}
+	.THblue {
+		--color-bg: #e0eaf1;
+		--color-light: #70a7e5;
+		--color-main: #3a7ed2;
+		--color-medium: #3368b0;
+		--color-dark: #1a477e;
+		--color-text: #445;
+	}
+	.THdark {
+		--color-bg: #36393e;
+		--color-light: #303133;
+		--color-main: #1f1f20;
+		--color-medium: #303135;
+		--color-dark: #18191b;
+		--color-text: #ddd;
+	}
+
+
+/* Scrollbar */ 
+
+	::-webkit-scrollbar{
+		width: 18px;
+	}
+
+	::-webkit-scrollbar-thumb{
+		background-color: var(--color-dark);
+		border-radius: 0;
+	}
+	::-webkit-scrollbar-thumb:hover{
+		background-color: var(--color-medium);
+
+	}
+	::-webkit-scrollbar-track{
+		background-color: var(--color-main);
+	}
+
+
+/*Elements*/
+	* {
+		margin: 0;
+		padding: 0;
+		user-select: none;
+		font-size: 18px;
+		font-stretch: condensed;
+		font-weight: lighter;
+	}
+	body {
+		font-size: 18px;
+		font-family: segoe ui, arial, sans serif;
+		font-stretch: condensed;
+		font-weight: lighter;
+		background-color: var(--color-bg);
+		color: var(--color-text);
+	}
+	a {
+		font-family: inherit;
+		color: inherit;
+	}
+	a:hover {
+		text-decoration: underline;
+	}
+	input {
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+		border:none;
+		height: 34;
+		padding: 8;
+		font-size: 0.94em;
+		background-color: #020510;
+	}
+	input[type="text"] {
+		background-color: var(--color-bg);
+		border: none;
+		padding: 5px;
+		color: var(--color-text);
+	}
+	button {
+		appeareance: none;
+		background-color: transparent;
+		border: none;
+	}
+	button.icon {
+		color: white;
+		padding: 7px;
+		float: left;
+	}
+	button.icon:hover {
+		background-color: var(--color-medium);
+		transition: background 100ms linear;
+	}
+	h1 {
+		color: var(--color-text);
+		font-weight: lighter;
+		font-size: 2.2em;
+		padding: 0;
+		margin: 0;
+		text-align: center;
+		white-space: nowrap;
+		overflow: hidden;
+	}
+	h2 {
+		color: var(--color-text);
+		font-weight: lighter;
+		font-size: 1.6em;
+		padding: 0;
+		margin: 0;
+	}
+	h3 {
+		color: var(--color-text);
+		font-weight: lighter;
+		font-size: 1.2em;
+		padding: 0;
+		margin: 0;
+		margin-top: 30px;
+		padding-top: 12px;
+	}
+	textarea {
+		width: 100%;
+	    height: 200px;
+	    resize: none;
+	    font-size: 1em;
+	    margin-bottom: 6px;
+	    background-color: var(--color-bg);
+		color: var(--color-text);
+	}
+
+	button.large {
+		background-color: var(--color-dark);
+		color: white;
+		padding: 8px;
+		width: 128;
+	}
+	button.large:hover {
+		background-color: var(--color-medium);	
+	}
+	button.toggle {
+		color: var(--color-text);
+		border-bottom: 2px solid var(--color-main);
+		padding-bottom: 5px;
+		margin-right: 8px;
+	}
+	button.toggle:hover {
+		background-color: transparent;
+		border-bottom: 4px solid var(--color-main);
+		padding-bottom: 3px;
+	}
+	button.toggle.on {
+		background-color: var(--color-main);
+		color: white;
+	}
+
+	input[type=checkBox] {
+		height: 28px;
+		width: 44px;
+		background-color: var(--color-main);
+		border: 4px solid var(--color-dark);
+		border-right-width: 20px;
+		transition: border 100ms ease;
+	}
+	input[type=checkBox]:checked {
+		background-color: var(--color-bg);
+		border: 4px solid var(--color-dark);
+		border-left-width: 20px;
+		transition: border 100ms ease;
+	}
+	body.THdark input[type=checkBox] {
+		background-color: var(--color-bg);
+	}
+	body.THdark input[type=checkBox]:checked {
+		background-color: var(--color-text);
+	}
+	select {
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+		border:none;
+		height: 38px;
+		border-bottom: 2px solid var(--color-main);
+		color: var(--color-text);
+		background-color: var(--color-bg);
+		padding-left: 10px;
+		padding-right: 10px;
+		margin-right: 8px;
+
+	}
+	select#color-select option {
+		font-weight: bold;
+		font-family: calibri;
+		font-size: 1.1em;
+	}
+	div#right input[type=text] {
+		width: 100%;
+		height: 38px;
+		border-bottom: 2px solid var(--color-main);
+		padding-left: 10px;
+		padding-right: 10px;
+		margin-right: 8px;
+	}
+	body > div.monospace input, body > div.monospace textarea {
+		font-family: monospace;
+	}
+
+
+
+
+/*Left*/
+	#left > div {
+		width: 50%;
+		position:fixed;
+		left: 0;
+	}
+	div#comp-list {
+		background-color: var(--color-bg);
+		overflow-y: scroll;
+		overflow-x: hidden;
+		top: 0;
+		bottom: 240px;
+	}
+	div#comp-view {
+		background-color: var(--color-dark);
+		height: 240px;
+		bottom: 0;
+	}
+
+	div#tools {
+		height: 38px;
+		color: var(--color-bg);
+	}
+	div#preview {
+		height: calc(100% - 38px);
+		background-color: var(--color-medium);
+		font-family: 'minecraftfont';
+		font-weight: normal;
+		font-stretch: normal;
+		font-size: 0.8em;
+		padding: 12px;
+		overflow-x: hidden;
+		overflow-y: auto;
+		white-space: nowrap;
+		color: white;
+	}
+	div#preview span {
+		font-size: 16px;
+	}
+	div.comp {
+		width: calc(100% - 10px);
+		background-color: var(--color-light);
+		padding: 5px;
+		margin-left: 4px;
+		margin-top: 4px;
+		height: 49px;
+		border: 1px solid var(--color-main);
+	}
+	div.comp.sel {
+		background-color: var(--color-main);
+		border: 1px solid var(--color-dark);
+	}
+	div.comp input {
+		float: left;
+		width: calc(100% - 110px);
+		margin-left: 6px;
+		height: 38px;
+		padding-left: 28px;
+	}
+	div.comp.no_icon input {
+		padding-left: 8px;
+	}
+	.drag {
+		color: white;
+		cursor: pointer;
+		float: left;
+		margin-top: 7px;
+	}
+	div.comp .textm_icon {
+		color: #aaa;
+		font-size: 18px;
+		margin-top: 11px;
+		margin-left: 12px;
+		position: absolute;
+	}
+	body.THdark #preview {
+		border-right: 2px solid var(--color-main);
+	}
+
+/*Tooltip*/
+	.tooltip {
+		position: absolute;
+		height: 38px;
+		box-sizing: border-box;
+		background-color: var(--color-main);
+		white-space: nowrap;
+		overflow: hidden;
+	}
+	.tab > .tooltip {
+		right: 38px;
+		padding: 5px;
+		margin-top: -7px;
+		max-width: 0px;
+		padding-left: 0px;
+		padding-right: 0px;
+		transition: max-width 150ms ease;
+	}
+	.tab:hover > .tooltip {
+		max-width: 120px;
+		transition: max-width 150ms ease;
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+	#tools .tooltip {
+		padding: 5px;
+		padding-top: 0;
+		padding-bottom: 0;
+		margin-top: -7px;
+		margin-left: -7px;
+		max-width: 120px;
+		height: 0px;
+		transition: height 100ms ease, margin 100ms ease;;
+	}
+	#tools button.icon:hover .tooltip {
+		margin-top: -45px;
+		height: 38px;
+		padding-top: 5px;
+		padding-bottom: 5px;
+		transition: height 100ms ease, margin 100ms ease;;
+	}
+
+/*Right*/
+	
+	#right {
+		position: fixed;
+		right: 38px;
+		height: 100%;
+		left: 50%;
+	}
+	#bar {
+		position: fixed;
+		right: 0;
+		height: 100%;
+		background-color: var(--color-dark);
+		width: 38px;
+	}
+	#r_header {
+		height: 60px;
+		box-sizing: border-box;
+	}
+	.rtab {
+		display: none;
+		padding: 16px;
+		box-sizing: border-box;
+		height: calc(100% - 60px);
+	}
+	button.tab.open {
+		background-color: var(--color-main);
+	}
+	.option > div {
+		float: left;
+	}
+	.option > input {
+		float: right;
+	}
+	.option {
+	}
+	.option::after {
+		content: "";
+		display: table;
+		clear: both;
+	}
+	.button-wrap {
+		height: 42px;
+		width: 100%;
+		display: block;
+		overflow: hidden;
+	}
+	.button-wrap > * {
+		float: left;
+	}
+
+/*SVS*/
+	#svs-lines {
+		width: 100%;
+		height: 50%;
+		border: 1px solid black;
+		overflow-y: scroll;
+	    margin-bottom: 6px;
+	}
+	.svsline {
+		padding: 4px;
+		user-select: all;
+	}
+	.svsline.svsel {
+		border-left: 5px solid var(--color-dark);
+	}
+
+/*Settings*/
+	.theme_button {
+		float: left;
+		height: 120px;
+		width: 120px;
+		margin: 10px;
+		background-color: var(--color-main);
+		border-bottom: 18px solid var(--color-dark);
+		border-top: 18px solid var(--color-light);
+		color: #fff;
+		padding-top: 52px;
+		font-size: 1.2em;
+		text-align: center;
+		border-radius: 20px;
+		cursor: pointer;
+	}
+	.theme_button:first-of-type {
+		margin-left: 0;
+	}
+	.theme_button:last-of-type {
+		margin-right: 0;
+	}
+	body.THpurple select > option.white, body.THblue select > option.white {
+		color: #333;
+	}
+
+
+/*Format*/
+	.black {
+		color: #000000;
+	}
+	.dark_blue {
+		color: #0000AA;
+	}
+	.dark_green {
+		color: #00AA00;
+	}
+	.dark_aqua {
+		color: #00AAAA;
+	}
+	.dark_red {
+		color: #AA0000;
+	}
+	.dark_purple {
+		color: #AA00AA;
+	}
+	.gold {
+		color: #FFAA00;
+	}
+	.gray {
+		color: #AAAAAA;
+	}
+	.dark_gray {
+		color: #555555;
+	}
+	.blue {
+		color: #5555FF;
+	}
+	.green {
+		color: #55FF55;
+	}
+	.aqua {
+		color: #55FFFF;
+	}
+	.red {
+		color: #FF5555;
+	}
+	.light_purple {
+		color: #FF55FF;
+	}
+	.yellow {
+		color: #FFFF55;
+	}
+	.white {
+		color: #FFF;
+	}
+	.bold {
+		font-weight: bold;
+	}
+	.italic {
+		font-style: italic;
+	}
+	.underlined {
+		text-decoration: underline;
+	}
+	.strikethrough {
+		text-decoration: line-through;
+	}
+	.strikethrough.underlined {
+		text-decoration: underline line-through;
+	}
+	.obfuscated {
+	}
+	.boxed {
+		border: 2px solid #ddd;
+	}
+
+@media (max-width:600px)  {
+	body > div#left {
+		position: static;
+		width: 100%;
+		height: auto;
+	}
+	body > div#left > div {
+		position: static;
+		width: 100%;
+	}
+	body > div#right {
+		position: static;
+		width: 100%;
+		height: auto;
+	}
+	body > div#bar {
+		position: fixed;
+		bottom: 0;
+		width: 100%;
+		height: 38px;
+	}
+	div#r_header {
+		display: none;
+	}
+	div#comp-view {
+		height: auto;
+	}
+	div#comp-list {
+		min-height: 35%;
+		height: auto;
+		overflow-y: hidden;
+	}
+	div#preview {
+		height: auto;
+	}
+	div.rtab {
+		height: auto;
+	}
+	div.tooltip {
+		display: none;
+	}
+	button.large {
+		width: calc(33% - 2px);
+	}
+	div.theme_button {
+		width: 80px;
+		height: 80px;
+		padding-top: 20px;
+	}
+	#tab_serversign {
+		display: none;
+	}
+
+}
+</style>
+<link rel="stylesheet" href="jquery-ui.min.css">
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.scrollto/2.1.2/jquery.scrollTo.min.js"></script>
+<script src="jquery-ui.min.js"></script>
+<script type="text/javascript">
+
+//Misc
+var docWidth, docHeight;
+var settings = {};
+function component(text) {
+}
+$(document).ready(function() {
+	$('button.toggle').on('click', function() {
+		if ($(this).hasClass('on')) {
+			$(this).removeClass('on')
+		} else {
+			$(this).addClass('on')
+		}
+	})
+	loadSettings()
+	changeTab()
+})
+$(document).keypress(function(event) {
+	if (event.ctrlKey) {
+		if (event.which == 83) {		//A
+			event.preventDefault()
+		} else if (event.which == 68) {	//D
+
+		}
+	}
+	if (event.which == 13) {			//Enter
+		obj = $('.comp.sel').last()
+		if (changeFocusedComp($(obj).index()+1)) {} else {
+			add()
+			changeFocusedComp($('.comp').length-1)
+		}
+		return;
+	}
+
+});
+window.onbeforeunload = function() {
+	setting('comp', generate())
+	localStorage.setItem('tellraw_settings', JSON.stringify(settings))
+}
+$(window).resize(function() {
+	docWidth = $(document).width()
+	docHeight = $(document).height()
+
+	var leftWidth = (docWidth-$('#right').width()-38)
+	if (leftWidth > 100) {
+		$('#left > div').width(leftWidth)
+		$('#right').css('left', leftWidth+'px')
+	}
+
+	var mW = docWidth-250;
+	$( "#right" ).resizable( "option", "maxWidth", mW );
+
+	
+	//$('#right').css('left', (docHeight-$('#right').height())+'px')
+	var cHeight = docHeight - $('#comp-view').height()
+	if (cHeight > 100) {
+		$('#comp-list').height(cHeight)
+		$('#comp-view').css('top', cHeight+'px')
+	}
+
+
+
+	var mH = docHeight - 150;
+	$( "#comp-view" ).resizable( "option", "maxHeight", mH );
+})
+function omitKeys(obj, keys) {
+    var dup = {};
+    for (key in obj) {
+        if (keys.indexOf(key) == -1) {
+            dup[key] = obj[key];
+        }
+    }
+    return dup;
+}
+jQuery.fn.selectText = function(){
+    this.find('input').each(function() {
+        if($(this).prev().length == 0 || !$(this).prev().hasClass('p_copy')) { 
+            $('<p class="p_copy" style="position: absolute; z-index: -1;"></p>').insertBefore($(this));
+        }
+        $(this).prev().html($(this).val());
+    });
+    var doc = document;
+    var element = this[0];
+    if (doc.body.createTextRange) {
+        var range = document.body.createTextRange();
+        range.moveToElementText(element);
+        range.select();
+    } else if (window.getSelection) {
+        var selection = window.getSelection();        
+        var range = document.createRange();
+        range.selectNodeContents(element);
+        selection.removeAllRanges();
+        selection.addRange(range);
+    }
+};
+jQuery.fn.delKey = function(key) {
+	try {
+		var data = $(this).data('json')
+		delete data[key]
+		$(this).data('json', data)
+	} catch (err) {
+	}
+}
+String.prototype.escapeLevel = function() {
+
+	/*
+	var arr = this.replaceGlobal('\\n','&§l_br;').split('\\')
+	var slashes = 0;
+	var result = "";
+	arr.forEach(function(s, i) {
+		if (s == '') {
+			slashes++;
+		} else if (i > 0) {
+			slashes++;
+			slashes = slashes*2;
+			while (slashes > 0) {
+				result += '\\'
+				slashes--
+			}
+			result += s;
+		} else {
+			result += s;
+		}
+	})
+	result = result.replaceGlobal('&§l_br;', '\\\\n').replaceGlobal('"','\\"')
+	*/
+	return this.replaceGlobal('\\', '\\\\').replaceGlobal('"', '\\"')
+}
+String.prototype.replaceGlobal = function(a,b) {
+	return this.split(a).join(b)
+}
+
+//Settings
+function loadSettings() {
+	if (localStorage.getItem('tellraw_settings') != null) {
+		settings = JSON.parse(localStorage.getItem('tellraw_settings'))
+	} else {
+		return;
+	}
+	setTheme(setting('theme'))
+	importJson(setting('comp'))
+	for (var k in settings) {
+		if (settings.hasOwnProperty(k)) {
+			console.log('Setting: '+k+': '+settings[k])
+			if (settings[k] === true || settings[k] === false) {
+				setting(k, settings[k])
+			}
+		}
+	}
+}
+function setting(name, value) {
+	if (value != undefined) {
+		//SET
+		settings[name] = value;
+		if (value === true) {
+			$('input#'+name).prop('checked', true)
+		} else if (value === false) {
+			$('input#'+name).prop('checked', false)
+		}
+		if (name == 'monospace') {
+			$('body > div.monospace').removeClass('monospace')
+			if (value) {
+				$('body > div').addClass('monospace')
+			}
+		}
+	} else {
+		//GET
+		return settings[name]
+	}
+}
+
+
+
+//List
+function add() {
+	var html = [
+		'<div class="comp no_icon" onclick="select(this, event)" data-json="">',
+		'<i class="material-icons drag">reorder</i>',
+		'<i class="material-icons drag textm_icon"></i>',
+		'<input type="text" ondblclick="changeTab(\'formatting\')">',
+		'<button type="button" class="icon" onclick="changeTab(\'formatting\')"><i class="material-icons">text_format</i></button>',
+		'<button type="button" class="icon" onclick="select($(this).parent(), event);removeSel()"><i class="material-icons">delete</i></button>',
+		'</div>'
+		].join('')
+	$('#comp-list').append(html)
+	$('.comp').last().data('json', {"textmode":"text"})
+	$('.comp input').last().select()
+
+	$('.comp').last().keyup(function(e) {
+		textchange($(this), false, e);
+	})
+}
+function select(obj, event) {
+	if (!event.shiftKey ) {
+		$('.comp.sel').removeClass('sel')
+	}
+	if (!$(obj).hasClass('sel')) {
+		$(obj).addClass('sel')
+	} else {
+		$(obj).removeClass('sel')
+	}
+	if (event.shiftKey && $('.comp.sel').length > 1 && $('.rtab#formatting')) {
+		
+	} else if ($('.comp.sel').length == 1) {
+		loadFormatting()
+	}
+	formatVisible()
+}
+function removeSel() {
+	$('.sel').remove()
+	formatVisible()
+	render()
+}
+function duplicate() {
+	$('.comp.sel').each(function(i, obj) {
+		var data = $.extend({}, $(obj).data('json'))
+		var clone = $(obj).clone()
+		$(clone).insertAfter($('.comp.sel').last())
+		$(clone).data('json', data)
+		select($(clone), event)
+	})
+	formatVisible()
+	render()
+}
+function selectAll() {
+	if ($('.comp:not(.sel)').length >= 1) {
+		$('.comp:not(.sel)').addClass('sel')
+	} else {
+		$('.comp.sel').removeClass('sel')
+	}
+	formatVisible()
+}
+
+
+//UI
+function changeTab(tab) {
+	$('.rtab').hide()
+	$('button.tab.open').removeClass('open')
+	if (tab == undefined) {
+		tab = 'export'
+	}
+	$('.rtab#'+tab).show()
+	$('button.tab#tab_'+tab).addClass('open')
+	if (tab == 'formatting') {
+		if ($('.comp.sel').length > 1) {
+			changeTab()
+		} else {
+			$('#tab_formatting').show()
+			loadFormatting()
+		}
+	} else if (tab == 'export') {
+		generate(false)
+	}
+}
+function changeFocusedComp(id) {
+	if (id <= $('.comp').length-1) {
+		var obj = $('.comp')[id]
+		$(obj).find('input').focus()
+		select(obj, event)
+		return true;
+	}
+}
+function loadFormatting() {
+	$('#tab_formatting').show()
+	$('button.toggle.on').removeClass('on')
+	$('#click-select').val('None')
+	$('#click-text').val('')
+	$('#insertion-text').val('')
+	var comp = $('.comp.sel').data('json')
+
+	if (comp.color) {$('#color-select').val(comp.color)} else {
+	$('#color-select').val('black')}
+	if (comp.bold == true) {$('button.toggle#bold').addClass('on')};
+	if (comp.italic == true) {$('button.toggle#italic').addClass('on')}
+	if (comp.underlined == true) {$('button.toggle#underlined').addClass('on')}
+	if (comp.strikethrough == true) {$('button.toggle#strikethrough').addClass('on')}
+	if (comp.obfuscated == true) {$('button.toggle#obfuscated').addClass('on')}
+	if (comp.textmode) {$('button.textmode#'+comp.textmode).addClass('on')} else {
+		$('button.textmode#text').addClass('on')
+	}
+	if (comp.clickEvent) {
+		$('#click-select').val($('#click-select option[id="'+comp.clickEvent.action+'"]').text())
+		$('#click-text').val(comp.clickEvent.value)
+	}
+	if (comp.insertion) {
+		$('#insertion-text').val(comp.insertion)
+	}
+}
+function formatVisible(visible) {
+	if (visible == undefined) {
+		visible = $('.comp.sel').length == 1
+	}
+	if (visible) {
+		$('#tab_formatting').show(200)
+	} else {
+		$('#tab_formatting').hide(200)
+		if ($('#tab_formatting.open')) {
+			changeTab()
+		}
+	}
+}
+function setTheme(color) {
+	if (color == undefined) {color = 'purple'}
+	$('.theme_button').removeClass('active')
+	$('body').removeClass()
+	$('.theme_button .TH'+color).addClass('active')
+	$('body').addClass('TH'+color)
+	setting('theme', color)
+}
+
+//Formatting
+function textchange(obj, del, event) {
+	/*
+	if (event.which == 38) {
+		changeFocusedComp($(obj).index()-1)
+		return;
+	}
+	if (event.which == 40) {
+		changeFocusedComp($(obj).index()+1)
+		return;
+	}
+	if (event.which == 13) {
+		if (changeFocusedComp($(obj).index()+1)) {} else {
+			add()
+			changeFocusedComp($('.comp').length-1)
+		}
+		return;
+	}
+	*/
+
+	var text = $(obj).find('input').val()
+	var data = $(obj).data('json')
+
+	if (del) {
+		delete data.score;
+		delete data.selector;
+		delete data.translate;
+		delete data.keybind;
+		delete data.text;
+	}
+	if (data.textmode == undefined) {data.textmode = 'text'}
+
+	if (data.textmode == 'score') {
+		try {
+			if (text.split(' ').length == 1) {
+				data.score.objective = text
+				data.score.name = text
+			} else {
+				data.score.objective = text.split(' ')[1]
+				data.score.name = text.split(' ')[0]
+			}
+		} catch (err) {
+			data.score = {}
+		}
+	} else if (text != '') {
+		data[data.textmode] = text;
+	} else {
+		delete data[data.textmode]
+	}
+
+	$(obj).data('json', data)
+
+	if ($('#tab_export.open').length > 0) {
+		generate()
+	}
+
+	render()
+}
+function colorchange() {
+	var obj = $('.comp.sel').get(0)
+	var color = $('#color-select').val()
+	if (color == 'default') {
+		$(obj).delKey('color')
+	} else {
+		$(obj).data('json', $.extend($(obj).data('json'), {"color":color}))
+	}
+	render()
+}
+function clickchange() {
+	var obj = $('.comp.sel').get(0)
+	var action = $('#click-select option:selected').attr('id')
+	if (action != 'none') {
+		var text = $('#click-text').val()
+		$(obj).data('json', $.extend($(obj).data('json'), {"clickEvent":{"action":action,"value":text}}))
+		render()
+	} else {
+		$(obj).delKey('clickEvent')
+	}
+}
+function insertionchange() {
+	var obj = $('.comp.sel').get(0)
+	var text = $('#insertion-text').val()
+	if (text != '') {
+		$(obj).data('json', $.extend($(obj).data('json'), {"insertion":text}))
+	} else {
+		$(obj).delKey('insertion')
+	}
+}
+function toggle(btn) {
+	var obj = $('.comp.sel').get(0)
+	var key = $(btn).attr('id')
+	if ($(btn).hasClass('on')) {
+		$(obj).data('json', $(obj).data('json'))
+		delete $(obj).data('json')[key]
+	} else {
+		$(obj).data('json', $.extend($(obj).data('json'), {[key]:true}))
+	}
+	
+	render()
+}
+function textmode(btn) {
+	var obj = $('.comp.sel').get(0)
+
+	$('button.textmode.on').removeClass('on')
+	var mode = $(btn).attr('id')
+	$(obj).data('json', $.extend($(obj).data('json'), {"textmode":mode}))
+	$(obj).removeClass('no_icon')
+	$(obj).find('input').removeAttr('list')
+	if (mode == 'text') {
+		$(obj).find('.textm_icon').text('')
+		$(obj).addClass('no_icon')
+	} else if (mode == 'translate') {
+		$(obj).find('.textm_icon').text('translate')
+	} else if (mode == 'keybind') {
+		$(obj).find('.textm_icon').text('keyboard')
+		$(obj).find('input').attr('list', 'keycodes')
+	} else if (mode == 'score') {
+		$(obj).find('.textm_icon').text('filter_1')
+	} else if (mode == 'selector') {
+		$(obj).find('.textm_icon').text('gps_fixed')
+	}
+	textchange(obj, true)
+	textchange(obj)
+
+	render()
+}
+function render() {
+	$('#preview').html('')
+	$('.comp').each(function(i, obj) {
+		var comp = $(obj).data('json')
+		var classes = []
+		if (comp.bold) {classes.push('bold')}
+		if (comp.italic) {classes.push('italic')}
+		if (comp.underlined) {classes.push('underlined')}
+		if (comp.strikethrough) {classes.push('strikethrough')}
+		if (comp.obfuscated) {classes.push('obfuscated')}
+		if (comp.textmode == 'keybind') {classes.push('boxed')}
+		if (comp.textmode == 'score') {classes.push('boxed')}
+		if (comp.textmode == 'selector') {classes.push('boxed')}
+		if (comp.color) {classes.push(comp.color)}
+		classes = classes.join(' ')
+
+		if ($(obj).find('input').val() != '') {
+			var span = '<span class="'+classes+'">'+$(obj).find('input').val().split('\\n').join('<br>')+'</span>'
+			$('#preview').append(span)
+			$('#preview span').last().click(function(event) {
+				select($(obj), event)
+			})
+			$('#preview span').last().dblclick(function(event) {
+				select($(obj), event)
+				changeTab('formatting')
+			})
+		}
+	})
+}
+
+//IO
+function generate(select, sign) {
+	var components = []
+	if (setting('inherit')) {
+		components.push("")
+	}
+	$('.comp').each(function(i, obj) {
+		var data = omitKeys($(obj).data('json'), ["textmode"])
+		if (!$.isEmptyObject(data)) {
+			components.push(data)
+		}
+	})
+	var string = JSON.stringify(components)
+
+	string = string.replaceGlobal('\\\\n', '\\n')
+	if (sign) {
+		string = string.escapeLevel()
+	}
+
+	$('textarea#output').val(string)
+	if (select) {
+		$('textarea#output').select()
+	}
+	return string;
+}
+function importJson(json) {
+	if (json) {
+		var arr = JSON.parse(json)
+	} else {
+		var arr = JSON.parse($('textarea#output').val().split('\\').join('\\\\'))
+	}
+	$('.comp').remove()
+	$('#tab_formatting').hide()
+	arr.forEach(function(s, i) {
+		add()
+		var obj = $('.comp').last()
+		var textmode = "text"
+		if (s.translate) {textmode = "translate"}
+		if (s.keybind) {textmode = "keybind"}
+		if (s.selector) {textmode = "selector"}
+		if (s.score) {textmode = "score"}
+		$(obj).data('json', $.extend(s, {"textmode":textmode}))
+		if (textmode != 'score') {
+			$(obj).find('input').val(s[textmode])
+		} else {
+			$(obj).find('input').val(s.score.name+' '+s.score.objective)
+		}
+		$(obj).removeClass('no_icon')
+		$(obj).find('input').removeAttr('list')
+		if (textmode == 'text') {
+			$(obj).find('.textm_icon').text('')
+			$(obj).addClass('no_icon')
+		} else if (textmode == 'translate') {
+			$(obj).find('.textm_icon').text('translate')
+		} else if (textmode == 'keybind') {
+			$(obj).find('.textm_icon').text('keyboard')
+			$(obj).find('input').attr('list', 'keycodes')
+		} else if (textmode == 'score') {
+			$(obj).find('.textm_icon').text('filter_1')
+		} else if (textmode == 'selector') {
+			$(obj).find('.textm_icon').text('gps_fixed')
+		}
+	})
+	render()
+}
+function buildSVS() {
+	var chatMax = 256;
+	var code = generate()
+	var lines = ['/svs long']
+	var crt = '';
+	var prv = '';
+	if ($('#svsborder').is(':checked')) {
+		code = code.substr(1, code.length-2)
+		code = '&lt;server&gt; /tellraw &lt;player&gt; [{"text":"------------------------------------------------","color":"gold"},'+code+',{"text":"------------------------------------------------ ","color":"gold"}]'
+	} else {
+		code = '&lt;server&gt; /tellraw &lt;player&gt; '+code
+	}
+	var words = code.split(' ')
+	words.forEach(function(s, i) {
+		crt += ' '+s
+		if (crt.length > chatMax) {
+			lines.push(prv.trim())
+			crt = s;
+		} else {
+		}
+		prv = crt
+	})
+	lines.push(crt)
+	lines.push('/svs long')
+	$('#svs-lines').html('')
+	lines.forEach(function(s, i) {
+		$('#svs-lines').append('<div class="svsline">'+s+'</div>')
+	})
+	$('.svsline').click(function() {
+		$('.svsel').removeClass('svsel')
+		$(this).addClass('svsel')
+	})
+}
+function svsGo() {
+	if ($('.svsel').length == 0) {
+		var obj = $('.svsline').get(0)
+		$(obj).addClass('svsel')
+	} else {
+		id = $('.svsline.svsel').index()
+		id++;
+		$('.svsline.svsel').removeClass('svsel')
+		var obj = $('.svsline').get(id)
+		$(obj).addClass('svsel')
+	}
+	$('.svsel').selectText()
+	document.execCommand('copy')
+}
+</script>
+<datalist id="keycodes">
+<option value="key.forward" />
+<option value="key.left" />
+<option value="key.right" />
+<option value="key.back" />
+<option value="key.sneak" />
+<option value="key.sprint" />
+<option value="key.inventory" />
+<option value="key.swapHands" />
+<option value="key.drop" />
+<option value="key.use" />
+<option value="key.attack" />
+<option value="key.pickItem" />
+<option value="key.chat" />
+<option value="key.playerlist" />
+<option value="key.command" />
+<option value="key.screenshot" />
+<option value="key.togglePerspective" />
+<option value="key.smoothCamera" />
+<option value="key.fullscreen" />
+<option value="key.spectatorOutlines" />
+<option value="key.hotbar." />
+<option value="key.saveToolbarActivator" />
+<option value="key.loadToolbarActivator" />
+</datalist>
+</head>
+<body spellcheck="false" class="THpurple">
+	<div id="left">
+		<div id="comp-list"></div>
+		<script>$('#comp-list').sortable()</script>
+		<div id="comp-view">
+			<div id="tools">
+				<button type="button" class="icon" onclick="add()"><div class="tooltip">Add</div><i class="material-icons">add</i></button>
+				<button type="button" class="icon" onclick="removeSel()"><div class="tooltip">Delete</div><i class="material-icons">delete</i></button>
+				<button type="button" class="icon" onclick="duplicate()"><div class="tooltip">Duplicate</div><i class="material-icons">content_copy</i></button>
+				<button type="button" class="icon" onclick="selectAll();removeSel()"><div class="tooltip">Clear</div><i class="material-icons">layers_clear</i></button>
+				<button type="button" class="icon" onclick="selectAll()"><div class="tooltip">Select All</div><i class="material-icons">select_all</i></button>
+			</div>
+			<div id="preview"></div>
+		</div>
+	</div>
+	<div id="right">
+		<div id="r_header">
+			<h1>Zofenia Component Editor</h1>
+		</div>
+		<div class="rtab" id="export">
+			<h2>Export</h2>
+			<textarea id="output"></textarea>
+			<button type="button" class="large" onclick="generate(true)">Generate</button>
+			<button type="button" class="large" onclick="generate(true, true)">Sign</button>
+			<button type="button" class="large" onclick="importJson()">Import</button>
+		</div>
+		<div class="rtab" id="settings">
+			<h2>Settings</h2>
+			<h3>Layout</h3>	
+			<!--div class="option">
+				<div>Text</div>
+				<input type="checkBox" id="text">
+			</div-->
+			<div class="option">
+				<div class="theme_button THpurple" onclick="setTheme('purple')">Purple</div>
+				<div class="theme_button THblue" onclick="setTheme('blue')">Blue</div>
+				<div class="theme_button THdark" onclick="setTheme('dark')">Dark</div>
+			</div>
+			<div class="option">
+				<label for="monospace">Use Monospace Font</label>
+				<input type="checkBox" id="monospace" onclick="setting('monospace', $(this).is(':checked'))">
+			</div>
+
+			<h3>Export</h3>	
+			<div class="option">
+				<label for="inherit">Avoid Inheritance</label>
+				<input type="checkBox" id="inherit" onclick="setting('inherit', $(this).is(':checked'))">
+			</div>
+				<!--div>No settings yet, sorry. Suggest features via Discord or Twitter <a href="http://twitter.com/JannisX11">@JannisX11</a></div-->
+		</div>
+		<div class="rtab" id="serversign">
+			<h2>Server Signs</h2>
+			<div class="option">
+				<div>Yellow Border Lines</div>
+				<input type="checkBox" id="svsborder">
+			</div>
+			<div id="svs-lines"></div>
+			<button type="button" class="large" onclick="buildSVS()">Build</button>
+			<button type="button" class="large" onclick="svsGo()">Go!</button>
+		</div>
+		<div class="rtab" id="formatting">
+			<h2>Formatting</h2>
+			<h3>Text</h3>
+			<div class="button-wrap">
+				<button type="button" class="icon toggle textmode on" onclick="textmode(this)" id="text">Text</button>
+				<button type="button" class="icon toggle textmode" onclick="textmode(this)" id="translate">Translation</button>
+				<button type="button" class="icon toggle textmode" onclick="textmode(this)" id="selector">Selector</button>
+				<button type="button" class="icon toggle textmode" onclick="textmode(this)" id="score">Score</button>
+				<button type="button" class="icon toggle textmode" onclick="textmode(this)" id="keybind">Keybind</button>
+			</div>
+
+			<h3>Style</h3>
+			<div class="button-wrap">
+				<select id="color-select" onchange="colorchange()">
+					<option class="default" selected>default</option>
+					<option class="black">black</option>
+					<option class="dark_blue">dark_blue</option>
+					<option class="dark_green">dark_green</option>
+					<option class="dark_aqua">dark_aqua</option>
+					<option class="dark_red">dark_red</option>
+					<option class="dark_purple">dark_purple</option>
+					<option class="gold">gold</option>
+					<option class="gray">gray</option>
+					<option class="dark_gray">dark_gray</option>
+					<option class="blue">blue</option>
+					<option class="green">green</option>
+					<option class="aqua">aqua</option>
+					<option class="red">red</option>
+					<option class="light_purple">light_purple</option>
+					<option class="yellow">yellow</option>
+					<option class="white">white</option>
+				</select>
+				<button type="button" class="icon toggle" onclick="toggle(this)" id="bold"><i class="material-icons">format_bold</i></button>
+				<button type="button" class="icon toggle" onclick="toggle(this)" id="italic"><i class="material-icons">format_italic</i></button>
+				<button type="button" class="icon toggle" onclick="toggle(this)" id="underlined"><i class="material-icons">format_underlined</i></button>
+				<button type="button" class="icon toggle" onclick="toggle(this)" id="strikethrough"><i class="material-icons">format_strikethrough</i></button>
+				<button type="button" class="icon toggle" onclick="toggle(this)" id="obfuscated"><i class="material-icons">format_size</i></button>
+			</div>
+
+			<h3>Click Event</h3>
+			<div class="button-wrap">
+				<select id="click-select" onchange="clickchange()">
+					<option id="none" selected>None</option>
+					<option id="run_command">Run Command</option>
+					<option id="suggest_command">Suggest Command</option>
+					<option id="open_url">Open URL</option>
+				</select>
+			</div>
+			<div class="button-wrap">
+				<input type="text" id="click-text" oninput="clickchange()">
+			</div>
+
+			<h3>Insertion</h3>
+			<div class="button-wrap">
+				<input type="text" id="insertion-text" oninput="insertionchange()">
+			</div>
+
+			<div class="option"></div>
+		</div>
+	</div>
+	<script>
+if ($(document).width() > 600) {
+	var maxWidth = $(document).width() - 300;
+	$('#right').resizable({
+		handles: "w",
+		minWidth: 380,
+		resize: function(event, ui) {
+			var width = docWidth - ui.size.width - 38;
+			$('#left > div').width(width)
+		}
+	})
+	$('#comp-view').resizable({
+		handles: "n",
+		minHeight: 100,
+		resize: function(event, ui) {
+			var height = docHeight - ui.size.height;
+			$('#comp-list').height(height)
+		}
+	})
+}
+	</script>
+	<div id="bar">
+		<button type="button" id="tab_export" class="icon tab open" onclick="changeTab('export')"><div class="tooltip">Export</div><i class="material-icons">save</i></button>
+		<button type="button" id="tab_settings" class="icon tab" onclick="changeTab('settings')"><div class="tooltip">Settings</div><i class="material-icons">settings</i></button>
+		<button type="button" id="tab_serversign" class="icon tab" onclick="changeTab('serversign')"><div class="tooltip">Server Signs</div><i class="material-icons">view_list</i></button>
+		<button type="button" id="tab_formatting" class="icon tab" onclick="changeTab('formatting')" style="display: none;"><div class="tooltip">Formatting</div><i class="material-icons">text_format</i></button>
+	</div>
+</body>
+</html>
